@@ -54,4 +54,4 @@ RUN \
 COPY --from=webui /bili_biliup/biliup/web/public/ /bili_biliup/biliup/web/public/
 WORKDIR /opt
 
-ENTRYPOINT ["bili_biliup"]
+ENTRYPOINT ["biliup"]
