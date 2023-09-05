@@ -4,13 +4,13 @@ FROM node:16-alpine as webui
 RUN \
   set -eux && \
   apk add --no-cache git && \
-  git clone --depth 1 https://github.com/ForgQi/biliup.git && \
-  cd biliup && \
+  git clone --depth 1 https://github.com/FairyWorld/bili_biliup.git && \
+  cd bili_biliup && \
   npm install && \
   npm run build
 
 # Deploy Biliup
-FROM python:3.9-slim as biliup
+FROM python:3.9-slim as bili_biliup
 ENV TZ=Asia/Shanghai
 EXPOSE 19159/tcp
 VOLUME /opt
@@ -24,8 +24,8 @@ RUN \
 #  apk add --no-cache --virtual .build-deps git curl gcc g++ && \
 #  apk add --no-cache ffmpeg musl-dev libffi-dev zlib-dev jpeg-dev ca-certificates && \
   apt-get install -y --no-install-recommends ffmpeg git g++; \
-  git clone --depth 1 https://github.com/ForgQi/biliup.git && \
-  cd biliup && \
+  git clone --depth 1 https://github.com/FairyWorld/bili_biliup.git && \
+  cd bili_biliup && \
   pip3 install --no-cache-dir quickjs && \
   pip3 install -e . && \
   # Clean up \
@@ -51,7 +51,7 @@ RUN \
 #  rm -rf /var/cache/apk/* && \
   rm -rf /var/log/*
 
-COPY --from=webui /biliup/biliup/web/public/ /biliup/biliup/web/public/
+COPY --from=webui /bili_biliup/biliup/web/public/ /bili_biliup/biliup/web/public/
 WORKDIR /opt
 
-ENTRYPOINT ["biliup"]
+ENTRYPOINT ["bili_biliup"]
