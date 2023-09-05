@@ -108,6 +108,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: dev-v2.7.0
 
       - name: Run tests
         run: |
