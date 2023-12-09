@@ -4,10 +4,7 @@ FROM node:16-alpine as webui
 RUN \
   set -eux && \
   apk add --no-cache git && \
-  git clone --depth 1 https://github.com/ForgQi/biliup.git && \
-  cd biliup && \
-  npm install && \
-  npm run build
+  git clone --depth 1 https://github.com/ForgQi/biliup.git
 
 # Deploy Biliup
 FROM python:3.9-slim as biliup
